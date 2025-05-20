@@ -3,47 +3,26 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ProjectsTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        // Fetch first available user or create one via factory
-        $user = User::first() ?? User::factory()->create();
+        $creator = User::first() ?? User::factory()->create();
 
-        DB::table('projects')->insert([
-            [
-                'name' => 'Project Alpha',
-                'description' => 'First sample project.',
-                'status' => 'pending',
-                'due_date' => now()->addDays(10),
-                'created_by' => $user->id,
-                'updated_by' => $user->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Project Beta',
-                'description' => 'Second sample project.',
-                'status' => 'in_progress',
-                'due_date' => now()->addDays(20),
-                'created_by' => $user->id,
-                'updated_by' => $user->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Project Gamma',
-                'description' => 'Third sample project.',
-                'status' => 'completed',
-                'due_date' => now()->addDays(30),
-                'created_by' => $user->id,
-                'updated_by' => $user->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        Project::factory()
+            ->count(100)
+            ->create([
+                'name' => fake()->words(2, true),
+                'description' => fake()->paragraph,
+                'status' => fake()->randomElement(['pending', 'in_progress', 'completed']),
+                'due_date' => now()->addDays(rand(5, 30)),
+                'created_by' => $creator->id,
+                'updated_by' => $creator->id,
+                'image' => 'project-image' . rand(1, 5) . '.png',
+
+            ]);
     }
 }

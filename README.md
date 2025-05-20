@@ -1,4 +1,4 @@
-59:00
+1:23:00
 https://www.youtube.com/watch?v=VrQRa-afCAk&t=62s
 
 model + factory + migration

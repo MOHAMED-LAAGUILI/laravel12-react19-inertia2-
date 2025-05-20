@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         // Seed projects and tasks
         $this->call([
+            UsersTableSeeder::class,
             ProjectsTableSeeder::class,
             TasksTableSeeder::class,
         ]);

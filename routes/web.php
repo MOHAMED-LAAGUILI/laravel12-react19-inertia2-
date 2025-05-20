@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\Projects\Controller\ProjectController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;

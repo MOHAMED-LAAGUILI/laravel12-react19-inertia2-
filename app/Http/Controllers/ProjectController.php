@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Resources\ProjectResource;
+use App\Models\Task;
+use App\Models\User;
+use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
@@ -13,7 +17,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $query = Project::with('createdBy');
+        $projects = $query->paginate(10)->onEachSide(1); // Removed ->onEachPage(1)
+        $users = User::all();
+        $tasks = Task::all();
+        
+        return Inertia::render('Project/Index', [
+            'projects' => ProjectResource::collection($projects),
+            'users' => $users,
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
