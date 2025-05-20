@@ -1,5 +1,6 @@
 https://www.youtube.com/watch?v=VrQRa-afCAk&t=62s
 
+2:00:00
 model + factory + migration
 php artisan make:model Project -fm
 
