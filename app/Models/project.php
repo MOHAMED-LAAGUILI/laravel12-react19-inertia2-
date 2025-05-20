@@ -2,22 +2,27 @@
 
 namespace App\Models;
 
-use App\Models\Traits\ProjectRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class project extends Model
+class Project extends Model
 {
-    use  HasFactory, ProjectRelationships;
+    use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'status',
-        'due_date',
-        'image',
-        'created_by',
-        'updated_by',
-    ];
+    protected $fillable = ['image_path', 'name', 'description', 'status', 'due_date', 'created_by', 'updated_by'];
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
